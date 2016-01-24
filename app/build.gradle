@@ -29,6 +29,7 @@ dependencies {
     compile 'com.squareup.okhttp:okhttp:2.4.0'
     compile 'com.squareup.retrofit:converter-gson:2.0.0-beta1'
     provided 'org.glassfish:javax.annotation:10.0-b28'
+    compile 'com.mcxiaoke.volley:library:1.0.19'
 
 
 }

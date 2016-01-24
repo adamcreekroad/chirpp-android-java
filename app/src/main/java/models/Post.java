@@ -1,20 +1,31 @@
 package models;
 
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.TextView;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import javax.annotation.Generated;
 
+import online.chirpp.www.chirpp.R;
+
 @Generated("org.jsonschema2pojo")
 public class Post {
 
-    private Integer id;
-    private User user;
-    private String message;
-    private String imageUrl;
-    private String videoUrl;
-    private String createdAt;
-    private String updatedAt;
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    Integer id;
+    public User user;
+    public String message;
+    String imageUrl;
+    String videoUrl;
+    public String author;
+    String createdAt;
+    String updatedAt;
+    Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     /**
      *
@@ -111,6 +122,14 @@ public class Post {
      * @return
      * The createdAt
      */
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
     public String getCreatedAt() {
         return createdAt;
     }

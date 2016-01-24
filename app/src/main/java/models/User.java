@@ -7,13 +7,13 @@ import javax.annotation.Generated;
 @Generated("org.jsonschema2pojo")
 public class User {
 
-    private Integer id;
-    private String username;
-    private String email;
-    private String firstName;
-    private String lastName;
-    private String token;
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    Integer id;
+    public String username;
+    String email;
+    String firstName;
+    String lastName;
+    String token;
+    Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     /**
      *
