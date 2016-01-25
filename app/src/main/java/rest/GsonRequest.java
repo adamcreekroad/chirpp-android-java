@@ -26,9 +26,9 @@ public class GsonRequest<T> extends Request<T> {
     /** result listener */
     private final Listener<T> listener;
 
-    public GsonRequest(String url, Class<T> clazz, Listener<T> listener,
+    public GsonRequest(Integer method, String url, Class<T> clazz, Listener<T> listener,
                        ErrorListener errorListener) {
-        super(Method.GET, url, errorListener);
+        super(method, url, errorListener);
 
         this.clazz = clazz;
         this.listener = listener;

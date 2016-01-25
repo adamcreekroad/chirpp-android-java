@@ -12,7 +12,7 @@ public class User {
     String email;
     public String first_name;
     String lastName;
-    String token;
+    String authentication_token;
     public String gravatar_url;
     Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
@@ -112,7 +112,7 @@ public class User {
      * The token
      */
     public String getToken() {
-        return token;
+        return authentication_token;
     }
 
     /**
@@ -121,7 +121,7 @@ public class User {
      * The token
      */
     public void setToken(String token) {
-        this.token = token;
+        this.authentication_token = token;
     }
 
     public String getGravatarUrl() {

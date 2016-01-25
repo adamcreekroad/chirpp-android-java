@@ -8,7 +8,9 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="online.chirpp.www.chirpp.LoginActivity">
+    tools:context="online.chirpp.www.chirpp.LoginActivity"
+    android:baselineAligned="true"
+    android:textAlignment="gravity">
     <!-- Login progress -->
     <ProgressBar
         android:id="@+id/login_progress"
@@ -30,20 +32,29 @@
             android:orientation="vertical"
             android:weightSum="1">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Log in to Chirpp"
+                android:id="@+id/textView"
+                android:gravity="left"
+                android:textSize="30dp" />
+
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-            </android.support.design.widget.TextInputLayout>
+                <AutoCompleteTextView
+                    android:id="@+id/email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/prompt_email"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:singleLine="true" />
 
-            <AutoCompleteTextView
-                android:id="@+id/email"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/prompt_email"
-                android:inputType="textEmailAddress"
-                android:maxLines="1"
-                android:singleLine="true" />
+            </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
@@ -71,7 +82,9 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/action_sign_in"
                 android:textStyle="bold"
-                android:layout_weight="4.13" />
+                android:layout_weight="4.13"
+                android:background="#ffac3b"
+                android:textColor="#ffffff" />
 
         </LinearLayout>
     </ScrollView>
