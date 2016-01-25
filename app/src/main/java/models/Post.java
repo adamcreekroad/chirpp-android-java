@@ -23,6 +23,8 @@ public class Post {
     String imageUrl;
     String videoUrl;
     public String author;
+    public String likes_message;
+    public String dislikes_message;
     String createdAt;
     String updatedAt;
     Map<String, Object> additionalProperties = new HashMap<String, Object>();

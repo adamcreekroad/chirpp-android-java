@@ -10,9 +10,10 @@ public class User {
     Integer id;
     public String username;
     String email;
-    String firstName;
+    public String first_name;
     String lastName;
     String token;
+    public String gravatar_url;
     Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     /**
@@ -75,7 +76,7 @@ public class User {
      * The firstName
      */
     public String getFirstName() {
-        return firstName;
+        return first_name;
     }
 
     /**
@@ -84,7 +85,7 @@ public class User {
      * The first_name
      */
     public void setFirstName(String firstName) {
-        this.firstName = firstName;
+        this.first_name = firstName;
     }
 
     /**
@@ -121,6 +122,14 @@ public class User {
      */
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public String getGravatarUrl() {
+        return gravatar_url;
+    }
+
+    public void setGravatarUrl(String gravatarUrl) {
+        this.gravatar_url = gravatarUrl;
     }
 
     public Map<String, Object> getAdditionalProperties() {

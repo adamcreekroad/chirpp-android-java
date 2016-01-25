@@ -12,6 +12,10 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.NetworkImageView;
+import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
+
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -20,10 +24,13 @@ import java.util.List;
 import models.Post;
 import models.User;
 import online.chirpp.www.chirpp.R;
+import rest.GetFeed;
 
 public class PostAdapter extends BaseAdapter {
     private LayoutInflater mInflater;
     private List<Post> mPosts;
+    private ImageLoader mImageLoader;
+    private ImageView mkImageView;
     private ViewHolder mViewHolder;
 
     private Bitmap mBitmap;
@@ -57,8 +64,12 @@ public class PostAdapter extends BaseAdapter {
         if (convertView == null) {
             convertView = mInflater.inflate(R.layout.item_post, parent, false);
             mViewHolder = new ViewHolder();
+            mViewHolder.authorName = (TextView) convertView.findViewById(R.id.post_author_name);
             mViewHolder.author = (TextView) convertView.findViewById(R.id.post_author);
             mViewHolder.message = (TextView) convertView.findViewById(R.id.post_message);
+            mViewHolder.likes_message = (TextView) convertView.findViewById(R.id.post_likes_message);
+            mViewHolder.dislikes_message = (TextView) convertView.findViewById(R.id.post_dislikes_message);
+            mViewHolder.avatar = (ImageView) convertView.findViewById(R.id.post_author_avatar);
 
             convertView.setTag(mViewHolder);
 
@@ -66,22 +77,29 @@ public class PostAdapter extends BaseAdapter {
             mViewHolder = (ViewHolder) convertView.getTag();
         }
 
-
         mPost = mPosts.get(position);
 
-        // ถ้าใช้ Picasso ก็ uncomment ข้างล้างนี้ แล้วลบ AsyncTask ออก
-        // Picasso.with(mActivity)
-        //    .load(mPost.getThumbnail())
-        //    .into(mViewHolder.thumbnail);
-
-        mViewHolder.author.setText(mPost.author);
+        mViewHolder.avatar.setClipToOutline(true);
+        mViewHolder.authorName.setText(mPost.user.first_name);
+        mViewHolder.author.setText(mPost.user.username);
         mViewHolder.message.setText(mPost.message);
+        mViewHolder.likes_message.setText(mPost.likes_message);
+        mViewHolder.dislikes_message.setText(mPost.dislikes_message);
+        UrlImageViewHelper.setUrlDrawable(mViewHolder.avatar, mPost.user.gravatar_url);
 
         return convertView;
     }
 
+
+
     private static class ViewHolder {
+        TextView authorName;
         TextView author;
         TextView message;
+        TextView likes_message;
+        TextView dislikes_message;
+        ImageView avatar;
     }
+
 }
+

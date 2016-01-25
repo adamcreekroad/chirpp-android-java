@@ -28,6 +28,7 @@ import java.util.List;
 
 import adapters.PostAdapter;
 import models.Post;
+import models.User;
 import rest.GetFeed;
 import rest.GsonRequest;
 
@@ -62,6 +63,7 @@ public class HomeFeedActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(Post[] response) {
                     List<Post> posts = Arrays.asList(response);
+
                     showData(posts);
                 }
             }, new Response.ErrorListener() {
@@ -72,7 +74,6 @@ public class HomeFeedActivity extends AppCompatActivity {
                     mListView.setVisibility(View.VISIBLE);
                 }
             });
-
         GetFeed.getInstance(this).addToRequestQueue(getNewsFeed);
     }
 
