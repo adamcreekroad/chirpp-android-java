@@ -7,7 +7,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import javax.annotation.Generated;
@@ -25,7 +27,8 @@ public class Post {
     public String author;
     public String likes_message;
     public String dislikes_message;
-    String createdAt;
+    public String created_at;
+    public String formatted_time;
     String updatedAt;
     Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
@@ -133,16 +136,15 @@ public class Post {
     }
 
     public String getCreatedAt() {
-        return createdAt;
+        return created_at;
     }
 
-    /**
-     *
-     * @param createdAt
-     * The created_at
-     */
     public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
+        this.created_at = createdAt;
+    }
+
+    public String getFormattedTime() {
+        return formatted_time;
     }
 
     /**

@@ -24,6 +24,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.google.android.gms.appindexing.Action;
 
@@ -161,6 +163,9 @@ public class LoginActivity extends AppCompatActivity {
                     return params;
                 }
             };
+            createNewSession.setRetryPolicy(new DefaultRetryPolicy(3000,
+                    DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                    DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
             GetFeed.getInstance(this).addToRequestQueue(createNewSession);
         }
     }

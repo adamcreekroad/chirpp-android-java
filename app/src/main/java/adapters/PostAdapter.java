@@ -3,8 +3,6 @@ package adapters;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,18 +11,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.toolbox.ImageLoader;
-import com.android.volley.toolbox.NetworkImageView;
 import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.List;
 
 import models.Post;
-import models.User;
 import online.chirpp.www.chirpp.R;
-import rest.GetFeed;
 
 public class PostAdapter extends BaseAdapter {
     private LayoutInflater mInflater;
@@ -66,6 +58,7 @@ public class PostAdapter extends BaseAdapter {
             mViewHolder = new ViewHolder();
             mViewHolder.authorName = (TextView) convertView.findViewById(R.id.post_author_name);
             mViewHolder.author = (TextView) convertView.findViewById(R.id.post_author);
+            mViewHolder.time = (TextView) convertView.findViewById(R.id.post_time);
             mViewHolder.message = (TextView) convertView.findViewById(R.id.post_message);
             mViewHolder.likes_message = (TextView) convertView.findViewById(R.id.post_likes_message);
             mViewHolder.dislikes_message = (TextView) convertView.findViewById(R.id.post_dislikes_message);
@@ -82,6 +75,7 @@ public class PostAdapter extends BaseAdapter {
         mViewHolder.avatar.setClipToOutline(true);
         mViewHolder.authorName.setText(mPost.user.first_name);
         mViewHolder.author.setText(mPost.user.username);
+        mViewHolder.time.setText(mPost.formatted_time);
         mViewHolder.message.setText(mPost.message);
         mViewHolder.likes_message.setText(mPost.likes_message);
         mViewHolder.dislikes_message.setText(mPost.dislikes_message);
@@ -95,6 +89,7 @@ public class PostAdapter extends BaseAdapter {
     private static class ViewHolder {
         TextView authorName;
         TextView author;
+        TextView time;
         TextView message;
         TextView likes_message;
         TextView dislikes_message;

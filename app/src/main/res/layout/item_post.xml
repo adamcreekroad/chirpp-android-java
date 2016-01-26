@@ -5,7 +5,10 @@
     android:layout_height="match_parent"
     android:weightSum="1"
     android:background="#FFFFFF"
-    android:padding="10dp">
+    android:paddingLeft="10dp"
+    android:paddingTop="10dp"
+    android:paddingRight="10dp"
+    android:paddingBottom="0dp">
 
     <LinearLayout
         android:orientation="horizontal"
@@ -55,6 +58,14 @@
             android:id="@+id/post_author"
             android:paddingLeft="5dp"
             android:textColor="#777" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Small Text"
+            android:id="@+id/post_time"
+            android:gravity="right" />
 
     </LinearLayout>
 
@@ -107,6 +118,80 @@
         android:paddingTop="5dp"
         android:paddingBottom="5dp"
         android:textColor="#555" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#dddddd" />
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal">
+
+            <ImageButton
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/button"
+                android:layout_column="0"
+                android:layout_weight="1"
+                android:layout_span="1"
+                android:gravity="start"
+                android:src="@drawable/ic_keyboard_arrow_down_black_24dp"/>
+
+            <ImageButton
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/button2"
+                android:layout_column="1"
+                android:layout_weight="1"
+                android:layout_span="1"
+                android:gravity="center_horizontal"
+                android:src="@drawable/ic_keyboard_arrow_up_black_24dp"/>
+
+            <ImageButton
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/button3"
+                android:layout_column="2"
+                android:layout_weight="1"
+                android:layout_span="1"
+                android:gravity="center_horizontal"
+                android:src="@drawable/ic_reply_black_24dp"/>
+
+            <ImageButton
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/button4"
+                android:layout_weight="1"
+                android:layout_column="3"
+                android:layout_span="1"
+                android:gravity="center_horizontal"
+                android:src="@drawable/ic_forum_black_24dp"/>
+
+            <ImageButton
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/button5"
+                android:layout_column="4"
+                android:layout_weight="1"
+                android:layout_span="1"
+                android:gravity="end"
+                android:background="#fff"
+                android:src="@drawable/ic_more_vert_black_24dp"/>
+
+        </TableRow>
+    </TableLayout>
 
 
 </LinearLayout>
