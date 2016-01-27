@@ -41,6 +41,16 @@
                 android:gravity="left"
                 android:textSize="30dp" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:id="@+id/login_error"
+                android:layout_gravity="center_horizontal"
+                android:singleLine="true"
+                android:text="Login info is incorrect"
+                android:textColor="#ff0000" />
+
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -76,14 +86,13 @@
 
             <Button
                 android:id="@+id/email_sign_in_button"
-                style="?android:textAppearanceSmall"
+                style="?android:attr/buttonStyleSmall"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="@string/action_sign_in"
                 android:textStyle="bold"
                 android:layout_weight="4.13"
-                android:background="#ffac3b"
                 android:textColor="#ffffff" />
 
         </LinearLayout>

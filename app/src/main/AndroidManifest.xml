@@ -3,6 +3,11 @@
     package="online.chirpp.www.chirpp">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <permission android:name="online.chirpp.www.chirpp.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+    <uses-permission android:name="online.chirpp.www.chirpp.permission.C2D_MESSAGE" />
 
     <application
         android:allowBackup="true"
@@ -10,7 +15,7 @@
         android:label="Chirpp"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".HomeFeedActivity"></activity>
+
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,15 +23,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!--
-             ATTENTION: This was auto-generated to add Google Play services to your project for
-             App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
-        -->
+        <activity android:name=".HomeFeedActivity"></activity>
+        <activity android:name=".NewPostActivity"></activity>
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
-
-        <activity android:name=".NewPostActivity"></activity>
     </application>
 
 </manifest>

@@ -45,12 +45,8 @@ public class LoginActivity extends AppCompatActivity {
     public static final String USERIDPREF = "uid";
     public static final String TOKENPREF = "tkn";
 
-    /**
-     * Keep track of the login task to ensure we can cancel it if requested.
-     */
-    private UserLoginTask mAuthTask = null;
-
     // UI references.
+    private TextView mLoginErrorView;
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
     private View mProgressView;
@@ -65,7 +61,7 @@ public class LoginActivity extends AppCompatActivity {
         final String authToken = prefs.getString(TOKENPREF, "shrdtkn");
         final String userID = prefs.getString(USERIDPREF, "shrduid");
 
-        if (authToken != "tkn" && userID != "uid") {
+        if (authToken != "shrdtkn" && userID != "shrduid") {
 
             goToFeed();
 
@@ -76,6 +72,8 @@ public class LoginActivity extends AppCompatActivity {
             setContentView(R.layout.activity_login);
             // Set up the login form.
             mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
+            mLoginErrorView = (TextView) findViewById(R.id.login_error);
+            mLoginErrorView.setVisibility(View.GONE);
 
             mPasswordView = (EditText) findViewById(R.id.password);
             mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -111,13 +109,12 @@ public class LoginActivity extends AppCompatActivity {
      * errors are presented and no actual login attempt is made.
      */
     private void attemptLogin() {
-        if (mAuthTask != null) {
-            return;
-        }
 
         // Reset errors.
         mEmailView.setError(null);
         mPasswordView.setError(null);
+        mLoginErrorView.setError(null);
+        mLoginErrorView.setVisibility(View.GONE);
 
         // Store values at the time of the login attempt.
         final String email = mEmailView.getText().toString();
@@ -166,6 +163,8 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     Log.d("LoginActivity", error.toString());
+                    showProgress(false);
+                    mLoginErrorView.setVisibility(View.VISIBLE);
                 }
             }) {
                 @Override
@@ -233,36 +232,14 @@ public class LoginActivity extends AppCompatActivity {
     public void onStart() {
         super.onStart();
 
-        Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "Login Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
-                Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app deep link URI is correct.
-                Uri.parse("android-app://online.chirpp.www.chirpp/http/host/path")
-        );
+        SharedPreferences prefs = getSharedPreferences(SHAREDPREFFILE, Context.MODE_PRIVATE);
+        final String authToken = prefs.getString(TOKENPREF, "shrdtkn");
+        final String userID = prefs.getString(USERIDPREF, "shrduid");
+
+        if (authToken != "shrdtkn" && userID != "shrduid") {
+            goToFeed();
+        }
     }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "Login Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
-                Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app deep link URI is correct.
-                Uri.parse("android-app://online.chirpp.www.chirpp/http/host/path")
-        );
-    }
-
 
     private interface ProfileQuery {
         String[] PROJECTION = {
@@ -272,48 +249,6 @@ public class LoginActivity extends AppCompatActivity {
 
         int ADDRESS = 0;
         int IS_PRIMARY = 1;
-    }
-
-    /**
-     * Represents an asynchronous login/registration task used to authenticate
-     * the user.
-     */
-    public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
-
-        private final String mEmail;
-        private final String mPassword;
-
-        UserLoginTask(String email, String password) {
-            mEmail = email;
-            mPassword = password;
-        }
-
-        @Override
-        protected Boolean doInBackground(Void... params) {
-
-
-            // TODO: register the new account here.
-            return true;
-        }
-
-        @Override
-        protected void onPostExecute(final Boolean success) {
-            mAuthTask = null;
-            showProgress(false);
-
-            if (success) {
-                finish();
-            } else {
-                mPasswordView.setError(getString(R.string.error_incorrect_password));
-                mPasswordView.requestFocus();
-            }
-        }
-
-        @Override
-        protected void onCancelled() {
-            mAuthTask = null;
-            showProgress(false);
-        }
     }
 
     private void cacheUserToken(User user) {

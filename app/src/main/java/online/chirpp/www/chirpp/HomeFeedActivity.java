@@ -81,17 +81,22 @@ public class HomeFeedActivity extends AppCompatActivity {
             }
         });
 
-        mListView.setOnScrollListener(new AbsListView.OnScrollListener()
-        {
+        FloatingActionButton mNewPostButton = (FloatingActionButton) findViewById(R.id.fab);
+
+        mNewPostButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                newPost();
+            }
+        });
+
+        mListView.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
-            public void onScrollStateChanged(AbsListView view, int scrollState)
-            {
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
 
             }
 
             @Override
-            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount)
-            {
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
                 int topRowVerticalPosition = (mListView == null || mListView.getChildCount() == 0) ? 0 : mListView.getChildAt(0).getTop();
                 mFeed.setEnabled(firstVisibleItem == 0 && topRowVerticalPosition >= 0);
             }
@@ -123,17 +128,18 @@ public class HomeFeedActivity extends AppCompatActivity {
         GsonRequest<Post[]> getNewsFeed = new GsonRequest<Post[]>(0, feedURL, Post[].class,
                 new Response.Listener<Post[]>(){
                     @Override
-                    public void onResponse(Post[] response) {
-                        List<Post> posts = Arrays.asList(response);
-                        showData(posts);
-                        mFeed.setRefreshing(false);
-                    }
-                }, new Response.ErrorListener() {
+            public void onResponse(Post[] response) {
+                List<Post> posts = Arrays.asList(response);
+                showData(posts);
+                mFeed.setRefreshing(false);
+            }
+        }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.d("HomeFeedActivity", error.toString());
                 mSpinner.setVisibility(View.GONE);
                 mListView.setVisibility(View.VISIBLE);
+                returnToLogin();
             }
         }) {
             @Override
@@ -145,4 +151,21 @@ public class HomeFeedActivity extends AppCompatActivity {
         };
         GetFeed.getInstance(this).addToRequestQueue(getNewsFeed);
     }
+
+    public void returnToLogin() {
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+    }
+
+    public void newPost() {
+        Intent intent = new Intent(this, NewPostActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onBackPressed()
+    {
+        moveTaskToBack(true);
+    }
+
 }
